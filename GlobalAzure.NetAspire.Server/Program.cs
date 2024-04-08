@@ -19,7 +19,10 @@ using System.Threading.Tasks;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+builder.AddServiceDefaults();
+
+builder.AddRedisDistributedCache("cache");
+
 builder.Services.AddAuthentication(IdentityConstants.ApplicationScheme)
     .AddIdentityCookies()
     .ApplicationCookie!.Configure(opt => opt.Events = new CookieAuthenticationEvents()
@@ -32,14 +35,16 @@ builder.Services.AddAuthentication(IdentityConstants.ApplicationScheme)
     });
 builder.Services.AddAuthorizationBuilder();
 
-var connectionString =
-    builder.Configuration.GetConnectionString("Database") ??
-    throw new ArgumentNullException("Invalid connection string.");
+//var connectionString =
+//    builder.Configuration.GetConnectionString("aspiredemodb") ??
+//    throw new ArgumentNullException("Invalid connection string.");
 
-builder.Services.AddDbContext<ApplicationDbContext>(options =>
-{
-    options.UseSqlServer(connectionString);
-});
+//builder.Services.AddDbContext<ApplicationDbContext>(options =>
+//{
+//    options.UseSqlServer(connectionString);
+//});
+
+builder.AddSqlServerDbContext<ApplicationDbContext>("aspiredemodb");
 
 builder.Services.AddIdentityCore<ApplicationUser>()
     .AddEntityFrameworkStores<ApplicationDbContext>()
@@ -61,6 +66,8 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
+
+app.MapDefaultEndpoints();
 
 app.MapIdentityApi<ApplicationUser>();
 
