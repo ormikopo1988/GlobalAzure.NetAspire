@@ -2,6 +2,11 @@ using Aspire.Hosting;
 
 var builder = DistributedApplication.CreateBuilder(args);
 
+// Automatically provision an Application Insights resource
+var insights = builder.ExecutionContext.IsPublishMode
+    ? builder.AddAzureApplicationInsights("aspiredemoapplicationinsights")
+    : builder.AddConnectionString("aspiredemoapplicationinsights", "APPLICATIONINSIGHTS_CONNECTION_STRING");
+
 // Provisions an Azure SQL Database when published
 var customerDb = builder
     .AddSqlServer("aspiredemosqlserver")
@@ -16,6 +21,7 @@ var cache = builder
 builder
     .AddProject<Projects.GlobalAzure_NetAspire_Server>("aspiredemoapp")
     .WithReference(customerDb)
-    .WithReference(cache);
+    .WithReference(cache)
+    .WithReference(insights);
 
 builder.Build().Run();
