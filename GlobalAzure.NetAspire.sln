@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GlobalAzure.NetAspire.Serve
 EndProject
 Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "globalazure.netaspire.client", "globalazure.netaspire.client\globalazure.netaspire.client.esproj", "{2EE707CB-2A1C-405A-B275-CE4F950D8A4F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GlobalAzure.NetAspire.AppHost", "GlobalAzure.NetAspire.AppHost\GlobalAzure.NetAspire.AppHost.csproj", "{FA9CDAD2-5F52-4BAE-9BD9-5D82D9640601}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GlobalAzure.NetAspire.AppHost", "GlobalAzure.NetAspire.AppHost\GlobalAzure.NetAspire.AppHost.csproj", "{FA9CDAD2-5F52-4BAE-9BD9-5D82D9640601}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GlobalAzure.NetAspire.ServiceDefaults", "GlobalAzure.NetAspire.ServiceDefaults\GlobalAzure.NetAspire.ServiceDefaults.csproj", "{B1883C16-3C7C-451D-A13A-563BDE34A108}"
 EndProject
@@ -16,6 +16,23 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{323A84E1-216C-4965-B35B-FCC305328A40}"
 	ProjectSection(SolutionItems) = preProject
 		.github\workflows\azure-dev.yml = .github\workflows\azure-dev.yml
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "infra", "infra", "{FD013849-E4FC-48A1-ACE5-3E0D66BF80C3}"
+	ProjectSection(SolutionItems) = preProject
+		infra\main.bicep = infra\main.bicep
+		infra\main.parameters.json = infra\main.parameters.json
+		infra\resources.bicep = infra\resources.bicep
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "aspiredemosqlserver", "aspiredemosqlserver", "{F3D66576-8387-4613-918B-28B40D8DFFA4}"
+	ProjectSection(SolutionItems) = preProject
+		infra\aspiredemosqlserver\aspire.hosting.azure.bicep.sql.bicep = infra\aspiredemosqlserver\aspire.hosting.azure.bicep.sql.bicep
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "cache", "cache", "{E747433A-E6E1-4072-8447-6F2E2469C56B}"
+	ProjectSection(SolutionItems) = preProject
+		infra\cache\aspire.hosting.azure.bicep.redis.bicep = infra\cache\aspire.hosting.azure.bicep.redis.bicep
 	EndProjectSection
 EndProject
 Global
@@ -48,6 +65,8 @@ Global
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{323A84E1-216C-4965-B35B-FCC305328A40} = {AD5A4E2C-3C7C-43AE-9191-98642335294C}
+		{F3D66576-8387-4613-918B-28B40D8DFFA4} = {FD013849-E4FC-48A1-ACE5-3E0D66BF80C3}
+		{E747433A-E6E1-4072-8447-6F2E2469C56B} = {FD013849-E4FC-48A1-ACE5-3E0D66BF80C3}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {D44FC9ED-C1E2-4228-8A1C-7BDB9E16841B}
