@@ -19,16 +19,15 @@ namespace GlobalAzure.NetAspire.Server.Services
     {
         private readonly ApplicationDbContext _applicationDbContext;
         private readonly IGitHubService _gitHubService;
-        //private readonly IDistributedCache _distributedCache;
+        private readonly IDistributedCache _distributedCache;
 
         public CustomerService(ApplicationDbContext applicationDbContext, 
-            IGitHubService gitHubService
-            //IDistributedCache distributedCache
-        )
+            IGitHubService gitHubService,
+            IDistributedCache distributedCache)
         {
             _applicationDbContext = applicationDbContext;
             _gitHubService = gitHubService;
-            //_distributedCache = distributedCache;
+            _distributedCache = distributedCache;
         }
 
         public async Task<Result<CustomerDto>> CreateCustomerAsync(CreateCustomerOptions createCustomerOptions, CancellationToken ct = default)
@@ -88,15 +87,15 @@ namespace GlobalAzure.NetAspire.Server.Services
 
         public async Task<Result<CustomerDto>> GetCustomerAsync(Guid customerId, CancellationToken ct = default)
         {
-            //var cachedCustomer = await _distributedCache.GetAsync($"customer:{customerId}");
+            var cachedCustomer = await _distributedCache.GetAsync($"customer:{customerId}");
 
-            //if (cachedCustomer is not null)
-            //{
-            //    return new Result<CustomerDto>
-            //    {
-            //        Data = JsonSerializer.Deserialize<CustomerDto>(cachedCustomer)!
-            //    };
-            //}
+            if (cachedCustomer is not null)
+            {
+                return new Result<CustomerDto>
+                {
+                    Data = JsonSerializer.Deserialize<CustomerDto>(cachedCustomer)!
+                };
+            }
 
             var customer = await _applicationDbContext
                 .Customers
@@ -116,10 +115,14 @@ namespace GlobalAzure.NetAspire.Server.Services
 
             var customerDto = customer.ToCustomerDto();
 
-            //await _distributedCache.SetAsync($"customer:{customerId}", Encoding.UTF8.GetBytes(JsonSerializer.Serialize(customerDto)), new()
-            //    {
-            //        AbsoluteExpiration = DateTime.Now.AddSeconds(10)
-            //    }, ct);
+            await _distributedCache.SetAsync(
+                $"customer:{customerId}", 
+                Encoding.UTF8.GetBytes(JsonSerializer.Serialize(customerDto)), 
+                new()
+                {
+                    AbsoluteExpiration = DateTime.Now.AddSeconds(10)
+                }, 
+                ct);
 
             return new Result<CustomerDto>
             {
