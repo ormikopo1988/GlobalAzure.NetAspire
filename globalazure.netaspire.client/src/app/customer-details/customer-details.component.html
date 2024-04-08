@@ -1,0 +1,6 @@
+<div *ngIf="customer">
+  <h2>{{ customer.fullName }} Details</h2>
+  <h3>Id: {{ customer.id }}</h3>
+  <h4>GitHub username: &#64;{{ customer.gitHubUsername }}</h4>
+  <button type="button" (click)="goBack()">go back</button>
+</div>
