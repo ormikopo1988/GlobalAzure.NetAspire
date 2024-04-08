@@ -33,6 +33,15 @@ module resources 'resources.bicep' = {
   }
 }
 
+module aspiredemoapplicationinsights 'aspiredemoapplicationinsights/aspire.hosting.azure.bicep.appinsights.bicep' = {
+  name: 'aspiredemoapplicationinsights'
+  scope: rg
+  params: {
+    location: location
+    appInsightsName: 'aspiredemoapplicationinsights'
+    logAnalyticsWorkspaceId: resources.outputs.AZURE_LOG_ANALYTICS_WORKSPACE_ID
+  }
+}
 module aspiredemosqlserver 'aspiredemosqlserver/aspire.hosting.azure.bicep.sql.bicep' = {
   name: 'aspiredemosqlserver'
   scope: rg
@@ -62,4 +71,5 @@ output AZURE_CONTAINER_APPS_ENVIRONMENT_ID string = resources.outputs.AZURE_CONT
 output AZURE_CONTAINER_APPS_ENVIRONMENT_DEFAULT_DOMAIN string = resources.outputs.AZURE_CONTAINER_APPS_ENVIRONMENT_DEFAULT_DOMAIN
 output SERVICE_BINDING_CACHEKV_ENDPOINT string = resources.outputs.SERVICE_BINDING_CACHEKV_ENDPOINT
 
+output ASPIREDEMOAPPLICATIONINSIGHTS_APPINSIGHTSCONNECTIONSTRING string = aspiredemoapplicationinsights.outputs.appInsightsConnectionString
 output ASPIREDEMOSQLSERVER_SQLSERVERFQDN string = aspiredemosqlserver.outputs.sqlServerFqdn

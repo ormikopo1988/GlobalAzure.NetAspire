@@ -9,14 +9,16 @@ properties:
   configuration:
     activeRevisionsMode: single
     ingress:
-      external: false
+      external: true
       targetPort: 8080
       transport: http
-      allowInsecure: true
+      allowInsecure: false
     registries:
     - server: {{ .Env.AZURE_CONTAINER_REGISTRY_ENDPOINT }}
       identity: {{ .Env.AZURE_CONTAINER_REGISTRY_MANAGED_IDENTITY_ID }}
     secrets:
+      - name: applicationinsights-connection-string
+        value: '{{ .Env.ASPIREDEMOAPPLICATIONINSIGHTS_APPINSIGHTSCONNECTIONSTRING }}'
       - name: connectionstrings--aspiredemodb
         value: Server=tcp:{{ .Env.ASPIREDEMOSQLSERVER_SQLSERVERFQDN }},1433;Encrypt=True;Authentication="Active Directory Default";Database=aspiredemodb
       - name: connectionstrings--cache
@@ -33,6 +35,8 @@ properties:
         value: "true"
       - name: OTEL_DOTNET_EXPERIMENTAL_OTLP_EMIT_EXCEPTION_LOG_ATTRIBUTES
         value: "true"
+      - name: APPLICATIONINSIGHTS_CONNECTION_STRING
+        secretRef: applicationinsights-connection-string
       - name: ConnectionStrings__aspiredemodb
         secretRef: connectionstrings--aspiredemodb
       - name: ConnectionStrings__cache

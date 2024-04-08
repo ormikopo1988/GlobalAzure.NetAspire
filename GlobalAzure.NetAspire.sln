@@ -35,6 +35,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "cache", "cache", "{E747433A
 		infra\cache\aspire.hosting.azure.bicep.redis.bicep = infra\cache\aspire.hosting.azure.bicep.redis.bicep
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "aspiredemoapplicationinsights", "aspiredemoapplicationinsights", "{5D67EB27-664B-46C7-A06F-A73CC2CAE401}"
+	ProjectSection(SolutionItems) = preProject
+		infra\aspiredemoapplicationinsights\aspire.hosting.azure.bicep.appinsights.bicep = infra\aspiredemoapplicationinsights\aspire.hosting.azure.bicep.appinsights.bicep
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -67,6 +72,7 @@ Global
 		{323A84E1-216C-4965-B35B-FCC305328A40} = {AD5A4E2C-3C7C-43AE-9191-98642335294C}
 		{F3D66576-8387-4613-918B-28B40D8DFFA4} = {FD013849-E4FC-48A1-ACE5-3E0D66BF80C3}
 		{E747433A-E6E1-4072-8447-6F2E2469C56B} = {FD013849-E4FC-48A1-ACE5-3E0D66BF80C3}
+		{5D67EB27-664B-46C7-A06F-A73CC2CAE401} = {FD013849-E4FC-48A1-ACE5-3E0D66BF80C3}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {D44FC9ED-C1E2-4228-8A1C-7BDB9E16841B}
