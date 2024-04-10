@@ -1,8 +1,8 @@
 @description('The location used for all deployed resources')
 param location string = resourceGroup().location
-@description('Id of the user or app to assign application roles')
-param principalId string = ''
 
+@description('Id of the user or app to assign application roles')
+param azurePrincipalId string
 
 @description('Tags that will be applied to all resources')
 param tags object = {}
@@ -90,7 +90,7 @@ resource kv265dafe5UserReadRoleAssignment 'Microsoft.Authorization/roleAssignmen
   name: guid(kv265dafe5.id, principalId, subscriptionResourceId('Microsoft.Authorization/roleDefinitions', '4633458b-17de-408a-b874-0445c86b69e6'))
   scope: kv265dafe5
   properties: {
-    principalId: principalId
+    principalId: azurePrincipalId
     principalType: 'User'
     roleDefinitionId:  subscriptionResourceId('Microsoft.Authorization/roleDefinitions', '4633458b-17de-408a-b874-0445c86b69e6')
   }
