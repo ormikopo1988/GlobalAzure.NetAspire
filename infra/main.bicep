@@ -12,6 +12,8 @@ param location string
 @description('Id of the user to assign application roles')
 param userPrincipalId string
 
+@description('Name of the user to assign application roles')
+param userPrincipalName string
 
 var tags = {
   'azd-env-name': environmentName
@@ -48,8 +50,8 @@ module aspiredemosqlserver 'aspiredemosqlserver/aspire.hosting.azure.bicep.sql.b
   params: {
     location: location
     databases: ['aspiredemodb']
-    principalId: resources.outputs.MANAGED_IDENTITY_PRINCIPAL_ID
-    principalName: resources.outputs.MANAGED_IDENTITY_NAME
+    userPrincipalId: userPrincipalId
+    userPrincipalName: userPrincipalName
     serverName: 'aspiredemosqlserver'
   }
 }

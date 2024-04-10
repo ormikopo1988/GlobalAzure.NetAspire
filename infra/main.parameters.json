@@ -5,6 +5,9 @@
       "userPrincipalId": {
         "value": "${USER_PRINCIPAL_ID}"
       },
+      "userPrincipalName": {
+        "value": "${USER_PRINCIPAL_NAME}"
+      },
       "environmentName": {
         "value": "${AZURE_ENV_NAME}"
       },

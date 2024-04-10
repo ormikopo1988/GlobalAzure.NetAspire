@@ -1,8 +1,8 @@
 @description('User name')
-param principalName string 
+param userPrincipalName string 
 
 @description('User id')
-param principalId string 
+param userPrincipalId string 
 
 @description('Tags that will be applied to all resources')
 param tags object = {}
@@ -27,9 +27,9 @@ resource sql 'Microsoft.Sql/servers@2022-05-01-preview' = {
     administrators: {
       administratorType: 'ActiveDirectory'
       azureADOnlyAuthentication: true
-      login: principalName
+      login: userPrincipalName
       principalType: 'User'
-      sid: principalId
+      sid: userPrincipalId
       tenantId: subscription().tenantId
     }
   }
