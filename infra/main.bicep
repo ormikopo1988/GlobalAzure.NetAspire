@@ -9,8 +9,8 @@ param environmentName string
 @description('The location used for all deployed resources')
 param location string
 
-@description('Id of the user or app to assign application roles')
-param azurePrincipalId string
+@description('Id of the user to assign application roles')
+param userPrincipalId string
 
 
 var tags = {
@@ -29,7 +29,7 @@ module resources 'resources.bicep' = {
   params: {
     location: location
     tags: tags
-    azurePrincipalId: azurePrincipalId
+    userPrincipalId: userPrincipalId
   }
 }
 
