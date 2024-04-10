@@ -25,8 +25,11 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Dump job context
+        run: echo "$AZURE_PRINCIPAL_ID"
+
       - name: Install azd
-        uses: Azure/setup-azd@v0.1.0
+        uses: Azure/setup-azd@v1.0.0
 
       - name: Install .NET Aspire workload
         run: dotnet workload install aspire
