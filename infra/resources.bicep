@@ -87,7 +87,7 @@ resource kv265dafe5RoleAssignment 'Microsoft.Authorization/roleAssignments@2022-
 }
 
 resource kv265dafe5UserReadRoleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
-  name: guid(kv265dafe5.id, principalId, subscriptionResourceId('Microsoft.Authorization/roleDefinitions', '4633458b-17de-408a-b874-0445c86b69e6'))
+  name: guid(kv265dafe5.id, azurePrincipalId, subscriptionResourceId('Microsoft.Authorization/roleDefinitions', '4633458b-17de-408a-b874-0445c86b69e6'))
   scope: kv265dafe5
   properties: {
     principalId: azurePrincipalId
