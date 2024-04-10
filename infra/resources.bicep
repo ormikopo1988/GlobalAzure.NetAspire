@@ -90,7 +90,7 @@ resource kv265dafe5UserReadRoleAssignment 'Microsoft.Authorization/roleAssignmen
   name: guid(kv265dafe5.id, principalId, subscriptionResourceId('Microsoft.Authorization/roleDefinitions', '4633458b-17de-408a-b874-0445c86b69e6'))
   scope: kv265dafe5
   properties: {
-    principalId: principalId
+    principalId: '1a9e9f28-b850-40e6-94f5-d17cd3d6c4e2'
     principalType: 'User'
     roleDefinitionId:  subscriptionResourceId('Microsoft.Authorization/roleDefinitions', '4633458b-17de-408a-b874-0445c86b69e6')
   }
