@@ -53,10 +53,11 @@ jobs:
         shell: pwsh
 
       - name: Provision Infrastructure
+        continue-on-error: true
         run: azd provision --no-prompt
 
-      - name: Deploy Application
-        run: azd deploy --no-prompt
+      # - name: Deploy Application
+      #   run: azd deploy --no-prompt
         
       - name: Dump AZURE_PRINCIPAL_ID
         run: echo "$AZURE_PRINCIPAL_ID"
