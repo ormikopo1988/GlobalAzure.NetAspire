@@ -73,3 +73,8 @@ output SERVICE_BINDING_KV265DAFE5_ENDPOINT string = resources.outputs.SERVICE_BI
 
 output ASPIREDEMOAPPLICATIONINSIGHTS_APPINSIGHTSCONNECTIONSTRING string = aspiredemoapplicationinsights.outputs.appInsightsConnectionString
 output ASPIREDEMOSQLSERVER_SQLSERVERFQDN string = aspiredemosqlserver.outputs.sqlServerFqdn
+
+output principalId
+output principalId
+output principalId
+output principalId
