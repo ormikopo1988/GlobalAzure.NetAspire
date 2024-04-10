@@ -1,8 +1,8 @@
 @description('User name')
-param userPrincipalName string 
+param principalName string 
 
 @description('User id')
-param userPrincipalId string 
+param principalId string 
 
 @description('Tags that will be applied to all resources')
 param tags object = {}
@@ -27,22 +27,22 @@ resource sql 'Microsoft.Sql/servers@2022-05-01-preview' = {
     administrators: {
       administratorType: 'ActiveDirectory'
       azureADOnlyAuthentication: true
-      login: userPrincipalName
+      login: principalName
       principalType: 'User'
-      sid: userPrincipalId
+      sid: principalId
       tenantId: subscription().tenantId
     }
   }
 
 resource sqlFirewall 'firewallRules@2022-05-01-preview' = {
-    name: 'fw-sql-localdev'
-    properties: {
-      startIpAddress: '0.0.0.0'
-      endIpAddress: '255.255.255.255'
-    }
+  name: 'fw-sql-localdev'
+  properties: {
+    startIpAddress: '0.0.0.0'
+    endIpAddress: '255.255.255.255'
+  }
 }
 
-  resource db 'databases@2022-05-01-preview' = [for name in databases:{
+resource db 'databases@2022-05-01-preview' = [for name in databases:{
   name: name
   location: location
   sku: {
@@ -50,7 +50,6 @@ resource sqlFirewall 'firewallRules@2022-05-01-preview' = {
   }
   tags: tags
   }]
-
 }
 
 output sqlServerFqdn string = sql.properties.fullyQualifiedDomainName
