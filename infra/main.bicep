@@ -58,7 +58,7 @@ module cache 'cache/aspire.hosting.azure.bicep.redis.bicep' = {
   scope: rg
   params: {
     location: location
-    keyVaultName: resources.outputs.SERVICE_BINDING_CACHEKV_NAME
+    keyVaultName: resources.outputs.SERVICE_BINDING_KV265DAFE5_NAME
     redisCacheName: 'cache'
   }
 }
@@ -69,7 +69,7 @@ output AZURE_CONTAINER_REGISTRY_ENDPOINT string = resources.outputs.AZURE_CONTAI
 output AZURE_CONTAINER_REGISTRY_MANAGED_IDENTITY_ID string = resources.outputs.AZURE_CONTAINER_REGISTRY_MANAGED_IDENTITY_ID
 output AZURE_CONTAINER_APPS_ENVIRONMENT_ID string = resources.outputs.AZURE_CONTAINER_APPS_ENVIRONMENT_ID
 output AZURE_CONTAINER_APPS_ENVIRONMENT_DEFAULT_DOMAIN string = resources.outputs.AZURE_CONTAINER_APPS_ENVIRONMENT_DEFAULT_DOMAIN
-output SERVICE_BINDING_CACHEKV_ENDPOINT string = resources.outputs.SERVICE_BINDING_CACHEKV_ENDPOINT
+output SERVICE_BINDING_KV265DAFE5_ENDPOINT string = resources.outputs.SERVICE_BINDING_KV265DAFE5_ENDPOINT
 
 output ASPIREDEMOAPPLICATIONINSIGHTS_APPINSIGHTSCONNECTIONSTRING string = aspiredemoapplicationinsights.outputs.appInsightsConnectionString
 output ASPIREDEMOSQLSERVER_SQLSERVERFQDN string = aspiredemosqlserver.outputs.sqlServerFqdn

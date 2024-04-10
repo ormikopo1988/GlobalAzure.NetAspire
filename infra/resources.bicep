@@ -63,8 +63,8 @@ resource containerAppEnvironment 'Microsoft.App/managedEnvironments@2023-05-01' 
   tags: tags
 }
 
-resource cachekv 'Microsoft.KeyVault/vaults@2023-07-01' = {
-  name: replace('cachekv-${resourceToken}', '-', '')
+resource kv265dafe5 'Microsoft.KeyVault/vaults@2023-07-01' = {
+  name: replace('kv265dafe5-${resourceToken}', '-', '')
   location: location
   properties: {
     sku: {
@@ -76,9 +76,9 @@ resource cachekv 'Microsoft.KeyVault/vaults@2023-07-01' = {
   }
 }
 
-resource cachekvRoleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
-  name: guid(cachekv.id, managedIdentity.id, subscriptionResourceId('Microsoft.Authorization/roleDefinitions', '00482a5a-887f-4fb3-b363-3b7fe8e74483'))
-  scope: cachekv
+resource kv265dafe5RoleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
+  name: guid(kv265dafe5.id, managedIdentity.id, subscriptionResourceId('Microsoft.Authorization/roleDefinitions', '00482a5a-887f-4fb3-b363-3b7fe8e74483'))
+  scope: kv265dafe5
   properties: {
     principalId: managedIdentity.properties.principalId
     principalType: 'ServicePrincipal'
@@ -86,12 +86,12 @@ resource cachekvRoleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-
   }
 }
 
-resource cachekvUserReadRoleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
-  name: guid(cachekv.id, principalId, subscriptionResourceId('Microsoft.Authorization/roleDefinitions', '4633458b-17de-408a-b874-0445c86b69e6'))
-  scope: cachekv
+resource kv265dafe5UserReadRoleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
+  name: guid(kv265dafe5.id, principalId, subscriptionResourceId('Microsoft.Authorization/roleDefinitions', '4633458b-17de-408a-b874-0445c86b69e6'))
+  scope: kv265dafe5
   properties: {
-    principalId: managedIdentity.properties.principalId
-    principalType: 'ServicePrincipal'
+    principalId: principalId
+    principalType: 'User'
     roleDefinitionId:  subscriptionResourceId('Microsoft.Authorization/roleDefinitions', '4633458b-17de-408a-b874-0445c86b69e6')
   }
 }
@@ -105,5 +105,5 @@ output AZURE_CONTAINER_REGISTRY_ENDPOINT string = containerRegistry.properties.l
 output AZURE_CONTAINER_REGISTRY_MANAGED_IDENTITY_ID string = managedIdentity.id
 output AZURE_CONTAINER_APPS_ENVIRONMENT_ID string = containerAppEnvironment.id
 output AZURE_CONTAINER_APPS_ENVIRONMENT_DEFAULT_DOMAIN string = containerAppEnvironment.properties.defaultDomain
-output SERVICE_BINDING_CACHEKV_ENDPOINT string = cachekv.properties.vaultUri
-output SERVICE_BINDING_CACHEKV_NAME string = cachekv.name
+output SERVICE_BINDING_KV265DAFE5_ENDPOINT string = kv265dafe5.properties.vaultUri
+output SERVICE_BINDING_KV265DAFE5_NAME string = kv265dafe5.name
