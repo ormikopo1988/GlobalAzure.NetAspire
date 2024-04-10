@@ -24,10 +24,7 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-
-      - name: Dump job context
-        run: echo "$AZURE_PRINCIPAL_ID"
-
+        
       - name: Install azd
         uses: Azure/setup-azd@v1.0.0
 
@@ -54,6 +51,9 @@ jobs:
             --client-secret "$($info.clientSecret)" `
             --tenant-id "$($info.tenantId)"
         shell: pwsh
+      
+      - name: Dump AZURE_PRINCIPAL_ID
+        run: echo "$AZURE_PRINCIPAL_ID"
 
       - name: Provision Infrastructure
         run: azd provision --no-prompt
