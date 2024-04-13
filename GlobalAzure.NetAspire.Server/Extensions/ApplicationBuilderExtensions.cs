@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using System.Linq;
 
 namespace GlobalAzure.NetAspire.Server.Extensions
 {
@@ -13,7 +14,10 @@ namespace GlobalAzure.NetAspire.Server.Extensions
 
             using var dbContext = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
 
-            dbContext.Database.Migrate();
+            if (dbContext.Database.GetPendingMigrations().Any())
+            {
+                dbContext.Database.Migrate();
+            }
         }
     }
 }
