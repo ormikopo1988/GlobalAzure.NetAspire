@@ -18,10 +18,18 @@ var cache = builder
     .AddRedis("cache")
     .PublishAsAzureRedis();
 
-builder
+var aspireDemoApp = builder
     .AddProject<Projects.GlobalAzure_NetAspire_Server>("aspiredemoapp")
     .WithReference(customerDb)
     .WithReference(cache)
     .WithReference(insights);
+
+// Angular: npm run start
+if (builder.ExecutionContext.IsRunMode)
+{
+    builder.AddNpmApp("aspiredemoclient", "../globalazure.netaspire.client")
+        .WithReference(aspireDemoApp)
+        .WithEndpoint(containerPort: 3000, scheme: "http", env: "PORT");
+}
 
 builder.Build().Run();
