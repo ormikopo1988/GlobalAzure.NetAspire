@@ -22,7 +22,8 @@ var aspireDemoApp = builder
     .AddProject<Projects.GlobalAzure_NetAspire_Server>("aspiredemoapp")
     .WithReference(customerDb)
     .WithReference(cache)
-    .WithReference(insights);
+    .WithReference(insights)
+    .WithExternalHttpEndpoints();
 
 // Angular: npm run start
 if (builder.ExecutionContext.IsRunMode)
