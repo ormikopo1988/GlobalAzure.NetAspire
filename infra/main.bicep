@@ -32,33 +32,29 @@ module resources 'resources.bicep' = {
   }
 }
 
-module aspiredemoapplicationinsights 'aspiredemoapplicationinsights/aspire.hosting.azure.bicep.appinsights.bicep' = {
+module aspiredemoapplicationinsights 'aspiredemoapplicationinsights/aspiredemoapplicationinsights.module.bicep' = {
   name: 'aspiredemoapplicationinsights'
   scope: rg
   params: {
     location: location
-    appInsightsName: 'aspiredemoapplicationinsights'
     logAnalyticsWorkspaceId: resources.outputs.AZURE_LOG_ANALYTICS_WORKSPACE_ID
   }
 }
-module aspiredemosqlserver 'aspiredemosqlserver/aspire.hosting.azure.bicep.sql.bicep' = {
+module aspiredemosqlserver 'aspiredemosqlserver/aspiredemosqlserver.module.bicep' = {
   name: 'aspiredemosqlserver'
   scope: rg
   params: {
     location: location
-    databases: ['aspiredemodb']
     principalId: resources.outputs.MANAGED_IDENTITY_PRINCIPAL_ID
     principalName: resources.outputs.MANAGED_IDENTITY_NAME
-    serverName: 'aspiredemosqlserver'
   }
 }
-module cache 'cache/aspire.hosting.azure.bicep.redis.bicep' = {
+module cache 'cache/cache.module.bicep' = {
   name: 'cache'
   scope: rg
   params: {
     location: location
     keyVaultName: resources.outputs.SERVICE_BINDING_KV265DAFE5_NAME
-    redisCacheName: 'cache'
   }
 }
 output MANAGED_IDENTITY_CLIENT_ID string = resources.outputs.MANAGED_IDENTITY_CLIENT_ID
