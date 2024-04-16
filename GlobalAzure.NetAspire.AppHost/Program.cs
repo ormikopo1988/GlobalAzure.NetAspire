@@ -22,14 +22,15 @@ var aspireDemoApp = builder
     .AddProject<Projects.GlobalAzure_NetAspire_Server>("aspiredemoapp")
     .WithReference(customerDb)
     .WithReference(cache)
-    .WithReference(insights);
+    .WithReference(insights)
+    .WithExternalHttpEndpoints();
 
 // Angular: npm run start
 if (builder.ExecutionContext.IsRunMode)
 {
     builder.AddNpmApp("aspiredemoclient", "../globalazure.netaspire.client")
         .WithReference(aspireDemoApp)
-        .WithEndpoint(containerPort: 3000, scheme: "http", env: "PORT");
+        .WithHttpEndpoint(targetPort: 3000, env: "PORT");
 }
 
 builder.Build().Run();
