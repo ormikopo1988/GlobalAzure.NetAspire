@@ -9,7 +9,6 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -34,15 +33,6 @@ builder.Services.AddAuthentication(IdentityConstants.ApplicationScheme)
         }
     });
 builder.Services.AddAuthorizationBuilder();
-
-//var connectionString =
-//    builder.Configuration.GetConnectionString("aspiredemodb") ??
-//    throw new ArgumentNullException("Invalid connection string.");
-
-//builder.Services.AddDbContext<ApplicationDbContext>(options =>
-//{
-//    options.UseSqlServer(connectionString);
-//});
 
 builder.AddSqlServerDbContext<ApplicationDbContext>("aspiredemodb");
 
