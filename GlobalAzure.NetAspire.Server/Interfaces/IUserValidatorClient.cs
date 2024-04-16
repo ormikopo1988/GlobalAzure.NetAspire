@@ -2,8 +2,8 @@
 
 namespace GlobalAzure.NetAspire.Server.Interfaces
 {
-    public interface IGitHubService
+    public interface IUserValidatorClient
     {
-        Task<bool> IsValidGitHubUser(string username);
+        Task<bool> IsValidUsernameAsync(string username);
     }
 }

@@ -18,11 +18,16 @@ var cache = builder
     .AddRedis("cache")
     .PublishAsAzureRedis();
 
+var aspireDemoApi = builder
+    .AddProject<Projects.GlobalAzure_NetAspire_Api>("aspiredemoapi")
+    .WithReference(insights);
+
 var aspireDemoApp = builder
     .AddProject<Projects.GlobalAzure_NetAspire_Server>("aspiredemoapp")
     .WithReference(customerDb)
     .WithReference(cache)
     .WithReference(insights)
+    .WithReference(aspireDemoApi)
     .WithExternalHttpEndpoints();
 
 // Angular: npm run start

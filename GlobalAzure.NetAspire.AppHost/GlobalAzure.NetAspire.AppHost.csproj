@@ -22,6 +22,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\GlobalAzure.NetAspire.Api\GlobalAzure.NetAspire.Api.csproj" />
     <ProjectReference Include="..\GlobalAzure.NetAspire.Server\GlobalAzure.NetAspire.Server.csproj" />
   </ItemGroup>
 

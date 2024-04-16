@@ -34,6 +34,13 @@ namespace GlobalAzure.NetAspire.Server.Controllers
         {
             try
             {
+                if (string.IsNullOrWhiteSpace(request.GitHubUsername))
+                {
+                    return CreateProblemDetailsObject(HttpStatusCode.BadRequest,
+                        "Bad Request",
+                        "GitHub username cannot be null or whitespace.");
+                }
+
                 var customerResult = await _customerService.CreateCustomerAsync(request.ToCustomerOptions(), cancellationToken);
 
                 if (customerResult.Data is not null)

@@ -9,11 +9,8 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Net.Http.Headers;
-using System;
 using System.Threading.Tasks;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -34,6 +31,12 @@ builder.Services.AddAuthentication(IdentityConstants.ApplicationScheme)
     });
 builder.Services.AddAuthorizationBuilder();
 
+builder.Services.AddSingleton<IUserValidatorClient, UserValidatorClient>();
+builder.Services.AddHttpClient("UserValidatorClient", httpClient =>
+{
+    httpClient.BaseAddress = new("https+http://aspiredemoapi");
+});
+
 builder.AddSqlServerDbContext<ApplicationDbContext>("aspiredemodb");
 
 builder.Services.AddIdentityCore<ApplicationUser>()
@@ -41,15 +44,6 @@ builder.Services.AddIdentityCore<ApplicationUser>()
     .AddApiEndpoints();
 
 builder.Services.AddScoped<ICustomerService, CustomerService>();
-builder.Services.AddSingleton<IGitHubService, GitHubService>();
-builder.Services.AddHttpClient("GitHub", httpClient =>
-{
-    httpClient.BaseAddress = new Uri(builder.Configuration.GetValue<string>("GitHub:ApiBaseUrl")!);
-    httpClient.DefaultRequestHeaders.Add(
-        HeaderNames.Accept, "application/vnd.github.v3+json");
-    httpClient.DefaultRequestHeaders.Add(
-        HeaderNames.UserAgent, $"Aspire-Demo-{Environment.MachineName}");
-});
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();

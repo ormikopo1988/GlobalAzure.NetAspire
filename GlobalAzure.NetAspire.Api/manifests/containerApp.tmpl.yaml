@@ -9,25 +9,20 @@ properties:
   configuration:
     activeRevisionsMode: single
     ingress:
-      external: true
+      external: false
       targetPort: {{ targetPortOrDefault 8080 }}
       transport: http
-      allowInsecure: false
+      allowInsecure: true
     registries:
     - server: {{ .Env.AZURE_CONTAINER_REGISTRY_ENDPOINT }}
       identity: {{ .Env.AZURE_CONTAINER_REGISTRY_MANAGED_IDENTITY_ID }}
     secrets:
       - name: applicationinsights-connection-string
         value: '{{ .Env.ASPIREDEMOAPPLICATIONINSIGHTS_APPINSIGHTSCONNECTIONSTRING }}'
-      - name: connectionstrings--aspiredemodb
-        value: Server=tcp:{{ .Env.ASPIREDEMOSQLSERVER_SQLSERVERFQDN }},1433;Encrypt=True;Authentication="Active Directory Default";Database=aspiredemodb
-      - name: connectionstrings--cache
-        keyVaultUrl: '{{ .Env.SERVICE_BINDING_KV265DAFE5_ENDPOINT }}secrets/connectionString'
-        identity: {{ .Env.AZURE_CONTAINER_REGISTRY_MANAGED_IDENTITY_ID }}
   template:
     containers:
     - image: {{ .Image }}
-      name: aspiredemoapp
+      name: aspiredemoapi
       env:
       - name: AZURE_CLIENT_ID
         value: {{ .Env.MANAGED_IDENTITY_CLIENT_ID }}
@@ -37,18 +32,10 @@ properties:
         value: "true"
       - name: OTEL_DOTNET_EXPERIMENTAL_OTLP_EMIT_EXCEPTION_LOG_ATTRIBUTES
         value: "true"
-      - name: services__aspiredemoapi__http__0
-        value: http://aspiredemoapi.internal.{{ .Env.AZURE_CONTAINER_APPS_ENVIRONMENT_DEFAULT_DOMAIN }}
-      - name: services__aspiredemoapi__https__0
-        value: https://aspiredemoapi.internal.{{ .Env.AZURE_CONTAINER_APPS_ENVIRONMENT_DEFAULT_DOMAIN }}
       - name: APPLICATIONINSIGHTS_CONNECTION_STRING
         secretRef: applicationinsights-connection-string
-      - name: ConnectionStrings__aspiredemodb
-        secretRef: connectionstrings--aspiredemodb
-      - name: ConnectionStrings__cache
-        secretRef: connectionstrings--cache
     scale:
       minReplicas: 1
 tags:
-  azd-service-name: aspiredemoapp
-  aspire-resource-name: aspiredemoapp
+  azd-service-name: aspiredemoapi
+  aspire-resource-name: aspiredemoapi

@@ -18,15 +18,15 @@ namespace GlobalAzure.NetAspire.Server.Services
     public class CustomerService : ICustomerService
     {
         private readonly ApplicationDbContext _applicationDbContext;
-        private readonly IGitHubService _gitHubService;
+        private readonly IUserValidatorClient _userValidatorClient;
         private readonly IDistributedCache _distributedCache;
 
-        public CustomerService(ApplicationDbContext applicationDbContext, 
-            IGitHubService gitHubService,
+        public CustomerService(ApplicationDbContext applicationDbContext,
+            IUserValidatorClient userValidatorClient,
             IDistributedCache distributedCache)
         {
             _applicationDbContext = applicationDbContext;
-            _gitHubService = gitHubService;
+            _userValidatorClient = userValidatorClient;
             _distributedCache = distributedCache;
         }
 
@@ -48,7 +48,7 @@ namespace GlobalAzure.NetAspire.Server.Services
                 };
             }
 
-            var isValidGitHubUser = await _gitHubService.IsValidGitHubUser(createCustomerOptions.GitHubUsername);
+            var isValidGitHubUser = await _userValidatorClient.IsValidUsernameAsync(createCustomerOptions.GitHubUsername);
             
             if (!isValidGitHubUser)
             {

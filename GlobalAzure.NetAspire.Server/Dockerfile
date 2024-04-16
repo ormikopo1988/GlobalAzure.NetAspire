@@ -16,8 +16,11 @@ RUN npm install -g @angular/cli
 FROM with-node AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
+COPY ["globalazure.netaspire.client/nuget.config", "globalazure.netaspire.client/"]
 COPY ["GlobalAzure.NetAspire.Server/GlobalAzure.NetAspire.Server.csproj", "GlobalAzure.NetAspire.Server/"]
+COPY ["GlobalAzure.NetAspire.Api.Contracts/GlobalAzure.NetAspire.Api.Contracts.csproj", "GlobalAzure.NetAspire.Api.Contracts/"]
 COPY ["globalazure.netaspire.client/globalazure.netaspire.client.esproj", "globalazure.netaspire.client/"]
+COPY ["GlobalAzure.NetAspire.ServiceDefaults/GlobalAzure.NetAspire.ServiceDefaults.csproj", "GlobalAzure.NetAspire.ServiceDefaults/"]
 RUN dotnet restore "./GlobalAzure.NetAspire.Server/GlobalAzure.NetAspire.Server.csproj"
 COPY . .
 WORKDIR "/src/GlobalAzure.NetAspire.Server"

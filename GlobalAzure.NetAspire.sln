@@ -27,18 +27,22 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "infra", "infra", "{FD013849
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "aspiredemosqlserver", "aspiredemosqlserver", "{F3D66576-8387-4613-918B-28B40D8DFFA4}"
 	ProjectSection(SolutionItems) = preProject
-		infra\aspiredemosqlserver\aspire.hosting.azure.bicep.sql.bicep = infra\aspiredemosqlserver\aspire.hosting.azure.bicep.sql.bicep
+		infra\aspiredemosqlserver\aspiredemosqlserver.module.bicep = infra\aspiredemosqlserver\aspiredemosqlserver.module.bicep
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "cache", "cache", "{E747433A-E6E1-4072-8447-6F2E2469C56B}"
 	ProjectSection(SolutionItems) = preProject
-		infra\cache\aspire.hosting.azure.bicep.redis.bicep = infra\cache\aspire.hosting.azure.bicep.redis.bicep
+		infra\cache\cache.module.bicep = infra\cache\cache.module.bicep
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "aspiredemoapplicationinsights", "aspiredemoapplicationinsights", "{5D67EB27-664B-46C7-A06F-A73CC2CAE401}"
 	ProjectSection(SolutionItems) = preProject
-		infra\aspiredemoapplicationinsights\aspire.hosting.azure.bicep.appinsights.bicep = infra\aspiredemoapplicationinsights\aspire.hosting.azure.bicep.appinsights.bicep
+		infra\aspiredemoapplicationinsights\aspiredemoapplicationinsights.module.bicep = infra\aspiredemoapplicationinsights\aspiredemoapplicationinsights.module.bicep
 	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GlobalAzure.NetAspire.Api", "GlobalAzure.NetAspire.Api\GlobalAzure.NetAspire.Api.csproj", "{8C4A4F96-3987-4044-882B-602810810025}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GlobalAzure.NetAspire.Api.Contracts", "GlobalAzure.NetAspire.Api.Contracts\GlobalAzure.NetAspire.Api.Contracts.csproj", "{06BAB3B2-DC86-4144-8F6D-34BD6026A4D2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -64,6 +68,14 @@ Global
 		{B1883C16-3C7C-451D-A13A-563BDE34A108}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B1883C16-3C7C-451D-A13A-563BDE34A108}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B1883C16-3C7C-451D-A13A-563BDE34A108}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8C4A4F96-3987-4044-882B-602810810025}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8C4A4F96-3987-4044-882B-602810810025}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8C4A4F96-3987-4044-882B-602810810025}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8C4A4F96-3987-4044-882B-602810810025}.Release|Any CPU.Build.0 = Release|Any CPU
+		{06BAB3B2-DC86-4144-8F6D-34BD6026A4D2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{06BAB3B2-DC86-4144-8F6D-34BD6026A4D2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{06BAB3B2-DC86-4144-8F6D-34BD6026A4D2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{06BAB3B2-DC86-4144-8F6D-34BD6026A4D2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

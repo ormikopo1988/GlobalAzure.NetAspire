@@ -1,11 +1,11 @@
-﻿using GlobalAzure.NetAspire.Server.Interfaces;
+﻿using GlobalAzure.NetAspire.Api.Interfaces;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Json;
 using System.Text.Json.Nodes;
 using System.Threading.Tasks;
 
-namespace GlobalAzure.NetAspire.Server.Services
+namespace GlobalAzure.NetAspire.Api.Services
 {
     public class GitHubService : IGitHubService
     {
@@ -16,7 +16,7 @@ namespace GlobalAzure.NetAspire.Server.Services
             _httpClientFactory = httpClientFactory;
         }
 
-        public async Task<bool> IsValidGitHubUser(string username)
+        public async Task<bool> IsValidGitHubUserAsync(string username)
         {
             var client = _httpClientFactory.CreateClient("GitHub");
 
