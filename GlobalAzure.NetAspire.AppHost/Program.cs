@@ -29,7 +29,7 @@ if (builder.ExecutionContext.IsRunMode)
 {
     builder.AddNpmApp("aspiredemoclient", "../globalazure.netaspire.client")
         .WithReference(aspireDemoApp)
-        .WithEndpoint(containerPort: 3000, scheme: "http", env: "PORT");
+        .WithHttpEndpoint(targetPort: 3000, env: "PORT");
 }
 
 builder.Build().Run();
