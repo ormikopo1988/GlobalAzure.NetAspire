@@ -5,7 +5,7 @@
     <TargetFramework>net8.0</TargetFramework>
     <Nullable>enable</Nullable>
     <IsAspireHost>true</IsAspireHost>
-    <UserSecretsId>b5c0a72a-f83a-4923-9db8-670912cc0d4b</UserSecretsId>
+    <UserSecretsId>e1cba8a6-cca4-4150-9323-d4a847e4f491</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
