@@ -1,5 +1,5 @@
-﻿using GlobalAzure.NetAspire.Api.Contracts.Responses;
-using GlobalAzure.NetAspire.Api.Contracts.Requests;
+﻿using GlobalAzure.NetAspire.Api.Contracts.Requests;
+using GlobalAzure.NetAspire.Api.Contracts.Responses;
 using GlobalAzure.NetAspire.Server.Interfaces;
 using System.Net.Http;
 using System.Threading.Tasks;

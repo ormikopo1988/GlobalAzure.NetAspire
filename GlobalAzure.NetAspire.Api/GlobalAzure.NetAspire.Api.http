@@ -1,6 +1,0 @@
-@GlobalAzure.NetAspire.Api_HostAddress = http://localhost:5036
-
-GET {{GlobalAzure.NetAspire.Api_HostAddress}}/weatherforecast/
-Accept: application/json
-
-###
