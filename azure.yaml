@@ -4,5 +4,5 @@ name: GlobalAzure.NetAspire
 services:  
   app:
     language: dotnet
-    project: .\GlobalAzure.NetAspire.AppHost\GlobalAzure.NetAspire.AppHost.csproj
+    project: .\src\GlobalAzure.NetAspire.AppHost\GlobalAzure.NetAspire.AppHost.csproj
     host: containerapp
