@@ -47,7 +47,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{6E975D0E-2FB9-40D6-BF2C-A164F54C492D}"
 	ProjectSection(SolutionItems) = preProject
 		Global Azure 2024 - Journey into the Future with .NET Aspire.pdf = Global Azure 2024 - Journey into the Future with .NET Aspire.pdf
-		Readme.md = Readme.md
+		README.md = README.md
 	EndProjectSection
 EndProject
 Global
