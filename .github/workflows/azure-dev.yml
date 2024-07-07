@@ -53,7 +53,9 @@ jobs:
         shell: pwsh
 
       - name: Provision Infrastructure
+        working-directory: ./src
         run: azd provision --no-prompt
 
       - name: Deploy Application
+        working-directory: ./src
         run: azd deploy --no-prompt
