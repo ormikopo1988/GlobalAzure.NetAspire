@@ -56,7 +56,7 @@ app.MapDefaultEndpoints();
 app.MapIdentityApi<ApplicationUser>();
 
 app.UseDefaultFiles();
-app.UseStaticFiles();
+app.MapStaticAssets();
 
 // Configure the HTTP request pipeline.
 app.ApplyMigrations();
