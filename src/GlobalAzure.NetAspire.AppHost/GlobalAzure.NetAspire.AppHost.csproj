@@ -10,16 +10,16 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Aspire.Hosting" Version="9.0.0" />
-    <PackageReference Include="Aspire.Hosting.AppHost" Version="9.0.0" />
-    <PackageReference Include="Aspire.Hosting.Azure" Version="9.0.0" />
-    <PackageReference Include="Aspire.Hosting.Azure.ApplicationInsights" Version="9.0.0" />
-    <PackageReference Include="Aspire.Hosting.Azure.Redis" Version="9.0.0" />
-    <PackageReference Include="Aspire.Hosting.Azure.Sql" Version="9.0.0" />
-    <PackageReference Include="Aspire.Hosting.NodeJs" Version="9.0.0" />
-    <PackageReference Include="Aspire.Hosting.Redis" Version="9.0.0" />
-    <PackageReference Include="Aspire.Hosting.SqlServer" Version="9.0.0" />
-    <PackageReference Include="Aspire.Microsoft.Data.SqlClient" Version="9.0.0" />
+    <PackageReference Include="Aspire.Hosting" Version="9.1.0" />
+    <PackageReference Include="Aspire.Hosting.AppHost" Version="9.1.0" />
+    <PackageReference Include="Aspire.Hosting.Azure" Version="9.1.0" />
+    <PackageReference Include="Aspire.Hosting.Azure.ApplicationInsights" Version="9.1.0" />
+    <PackageReference Include="Aspire.Hosting.Azure.Redis" Version="9.1.0" />
+    <PackageReference Include="Aspire.Hosting.Azure.Sql" Version="9.1.0" />
+    <PackageReference Include="Aspire.Hosting.NodeJs" Version="9.1.0" />
+    <PackageReference Include="Aspire.Hosting.Redis" Version="9.1.0" />
+    <PackageReference Include="Aspire.Hosting.SqlServer" Version="9.1.0" />
+    <PackageReference Include="Aspire.Microsoft.Data.SqlClient" Version="9.1.0" />
   </ItemGroup>
 
   <ItemGroup>
