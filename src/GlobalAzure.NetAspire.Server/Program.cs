@@ -51,8 +51,6 @@ builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
-app.MapDefaultEndpoints();
-
 app.MapIdentityApi<ApplicationUser>();
 
 app.UseDefaultFiles();
@@ -88,5 +86,7 @@ app.MapPost("/logout", async (
 app.MapFallbackToFile("/index.html");
 
 app.MapControllers();
+
+app.MapDefaultEndpoints();
 
 app.Run();
