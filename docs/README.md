@@ -6,7 +6,7 @@
 The steps in this section demonstrate how to handle 
 provisioning and deploying of a .NET Aspire app to Azure using `azd`:
   
-- Create a new .NET Aspire application using Visual Studio Preview.  
+- Create a new .NET Aspire application using Visual Studio 2022 version 17.9 or higher.  
 - Important: If you are on Windows, and your user has an extra whitespace character, use the following command
 through a PowerShell terminal before continuing. You can find more details in [this GitHub issue](https://github.com/Azure-Samples/azure-search-openai-demo/issues/502):
 
@@ -14,7 +14,7 @@ through a PowerShell terminal before continuing. You can find more details in [t
 $env:AZD_CONFIG_DIR="C:\azdConfig"
 ```
 
-- Update the vulnerable packages in all projects of the template.
+- Update the vulnerable packages in all projects of the template (if any).
 - Execute the `azd init` command to initialize your project with `azd`, 
 which will inspect the local directory structure and determine the type of app:
 

@@ -1,8 +1,8 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-dev/main/schemas/v1.0/azure.yaml.json
 
-name: GlobalAzure.NetAspire
+name: globalazure-netaspire
 services:  
   app:
     language: dotnet
-    project: .\src\GlobalAzure.NetAspire.AppHost\GlobalAzure.NetAspire.AppHost.csproj
+    project: ./src/GlobalAzure.NetAspire.AppHost/GlobalAzure.NetAspire.AppHost.csproj
     host: containerapp
