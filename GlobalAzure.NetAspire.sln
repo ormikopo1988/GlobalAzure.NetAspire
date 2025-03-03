@@ -36,8 +36,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{8A4E12FB-EA2
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{E49F6A0C-105B-4DD0-99D4-F6DA4F086CEA}"
 	ProjectSection(SolutionItems) = preProject
-		docs\Global Azure 2024 - Journey into the Future with .NET Aspire.pdf = docs\Global Azure 2024 - Journey into the Future with .NET Aspire.pdf
 		docs\README.md = docs\README.md
+		docs\Unlock the power of .NET in the cloud - Journey into the future with .NET Aspire.pdf = docs\Unlock the power of .NET in the cloud - Journey into the future with .NET Aspire.pdf
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GlobalAzure.NetAspire.Api", "src\GlobalAzure.NetAspire.Api\GlobalAzure.NetAspire.Api.csproj", "{88AB32E9-51FF-4B2A-845F-649FBA6D0E9B}"
