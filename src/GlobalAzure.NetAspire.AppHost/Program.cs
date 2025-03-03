@@ -9,14 +9,14 @@ var insights = builder.ExecutionContext.IsPublishMode
 
 // Provisions an Azure SQL Database when published
 var customerDb = builder
-    .AddSqlServer("aspiredemosqlserver")
-    .PublishAsAzureSqlDatabase()
+    .AddAzureSqlServer("aspiredemosqlserver")
+    .RunAsContainer()
     .AddDatabase("aspiredemodb");
 
 // Provisions an Azure Redis Cache when published
 var cache = builder
-    .AddRedis("cache")
-    .PublishAsAzureRedis();
+    .AddAzureRedis("cache")
+    .RunAsContainer();
 
 var aspireDemoApi = builder
     .AddProject<Projects.GlobalAzure_NetAspire_Api>("aspiredemoapi")
