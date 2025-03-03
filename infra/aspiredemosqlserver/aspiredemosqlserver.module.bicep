@@ -1,24 +1,14 @@
-targetScope = 'resourceGroup'
-
-@description('')
+@description('The location for the resource(s) to be deployed.')
 param location string = resourceGroup().location
 
-@description('')
 param principalId string
 
-@description('')
 param principalName string
 
-
-resource sqlServer_AlbGRuv5W 'Microsoft.Sql/servers@2020-11-01-preview' = {
-  name: toLower(take('aspiredemosqlserver${uniqueString(resourceGroup().id)}', 24))
+resource aspiredemosqlserver 'Microsoft.Sql/servers@2021-11-01' = {
+  name: take('aspiredemosqlserver-${uniqueString(resourceGroup().id)}', 63)
   location: location
-  tags: {
-    'aspire-resource-name': 'aspiredemosqlserver'
-  }
   properties: {
-    version: '12.0'
-    publicNetworkAccess: 'Enabled'
     administrators: {
       administratorType: 'ActiveDirectory'
       login: principalName
@@ -26,24 +16,28 @@ resource sqlServer_AlbGRuv5W 'Microsoft.Sql/servers@2020-11-01-preview' = {
       tenantId: subscription().tenantId
       azureADOnlyAuthentication: true
     }
+    minimalTlsVersion: '1.2'
+    publicNetworkAccess: 'Enabled'
+    version: '12.0'
+  }
+  tags: {
+    'aspire-resource-name': 'aspiredemosqlserver'
   }
 }
 
-resource sqlFirewallRule_AKp4wcLSZ 'Microsoft.Sql/servers/firewallRules@2020-11-01-preview' = {
-  parent: sqlServer_AlbGRuv5W
+resource sqlFirewallRule_AllowAllAzureIps 'Microsoft.Sql/servers/firewallRules@2021-11-01' = {
   name: 'AllowAllAzureIps'
   properties: {
-    startIpAddress: '0.0.0.0'
     endIpAddress: '0.0.0.0'
+    startIpAddress: '0.0.0.0'
   }
+  parent: aspiredemosqlserver
 }
 
-resource sqlDatabase_lOnIWbv5p 'Microsoft.Sql/servers/databases@2020-11-01-preview' = {
-  parent: sqlServer_AlbGRuv5W
+resource aspiredemodb 'Microsoft.Sql/servers/databases@2021-11-01' = {
   name: 'aspiredemodb'
   location: location
-  properties: {
-  }
+  parent: aspiredemosqlserver
 }
 
-output sqlServerFqdn string = sqlServer_AlbGRuv5W.properties.fullyQualifiedDomainName
+output sqlServerFqdn string = aspiredemosqlserver.properties.fullyQualifiedDomainName

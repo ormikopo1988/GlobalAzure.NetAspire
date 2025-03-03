@@ -1,8 +1,8 @@
 @description('The location used for all deployed resources')
 param location string = resourceGroup().location
+@description('Id of the user or app to assign application roles')
+param principalId string = ''
 
-@description('Id of the user to assign application roles')
-param userPrincipalId string
 
 @description('Tags that will be applied to all resources')
 param tags object = {}
@@ -48,10 +48,14 @@ resource logAnalyticsWorkspace 'Microsoft.OperationalInsights/workspaces@2022-10
   tags: tags
 }
 
-resource containerAppEnvironment 'Microsoft.App/managedEnvironments@2023-05-01' = {
+resource containerAppEnvironment 'Microsoft.App/managedEnvironments@2024-02-02-preview' = {
   name: 'cae-${resourceToken}'
   location: location
   properties: {
+    workloadProfiles: [{
+      workloadProfileType: 'Consumption'
+      name: 'consumption'
+    }]
     appLogsConfiguration: {
       destination: 'log-analytics'
       logAnalyticsConfiguration: {
@@ -61,38 +65,22 @@ resource containerAppEnvironment 'Microsoft.App/managedEnvironments@2023-05-01' 
     }
   }
   tags: tags
-}
 
-resource kv265dafe5 'Microsoft.KeyVault/vaults@2023-07-01' = {
-  name: replace('kv265dafe5-${resourceToken}', '-', '')
-  location: location
-  properties: {
-    sku: {
-      name: 'standard'
-      family: 'A'
+  resource aspireDashboard 'dotNetComponents' = {
+    name: 'aspire-dashboard'
+    properties: {
+      componentType: 'AspireDashboard'
     }
-    tenantId: subscription().tenantId
-    enableRbacAuthorization: true
   }
+
 }
 
-resource kv265dafe5RoleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
-  name: guid(kv265dafe5.id, managedIdentity.id, subscriptionResourceId('Microsoft.Authorization/roleDefinitions', '00482a5a-887f-4fb3-b363-3b7fe8e74483'))
-  scope: kv265dafe5
+resource explicitContributorUserRoleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
+  name: guid(containerAppEnvironment.id, principalId, subscriptionResourceId('Microsoft.Authorization/roleDefinitions', 'b24988ac-6180-42a0-ab88-20f7382dd24c'))
+  scope: containerAppEnvironment
   properties: {
-    principalId: managedIdentity.properties.principalId
-    principalType: 'ServicePrincipal'
-    roleDefinitionId:  subscriptionResourceId('Microsoft.Authorization/roleDefinitions', '00482a5a-887f-4fb3-b363-3b7fe8e74483')
-  }
-}
-
-resource kv265dafe5UserReadRoleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
-  name: guid(kv265dafe5.id, userPrincipalId, subscriptionResourceId('Microsoft.Authorization/roleDefinitions', '4633458b-17de-408a-b874-0445c86b69e6'))
-  scope: kv265dafe5
-  properties: {
-    principalId: userPrincipalId
-    principalType: 'User'
-    roleDefinitionId:  subscriptionResourceId('Microsoft.Authorization/roleDefinitions', '4633458b-17de-408a-b874-0445c86b69e6')
+    principalId: principalId
+    roleDefinitionId:  subscriptionResourceId('Microsoft.Authorization/roleDefinitions', 'b24988ac-6180-42a0-ab88-20f7382dd24c')
   }
 }
 
@@ -103,7 +91,7 @@ output AZURE_LOG_ANALYTICS_WORKSPACE_NAME string = logAnalyticsWorkspace.name
 output AZURE_LOG_ANALYTICS_WORKSPACE_ID string = logAnalyticsWorkspace.id
 output AZURE_CONTAINER_REGISTRY_ENDPOINT string = containerRegistry.properties.loginServer
 output AZURE_CONTAINER_REGISTRY_MANAGED_IDENTITY_ID string = managedIdentity.id
+output AZURE_CONTAINER_REGISTRY_NAME string = containerRegistry.name
+output AZURE_CONTAINER_APPS_ENVIRONMENT_NAME string = containerAppEnvironment.name
 output AZURE_CONTAINER_APPS_ENVIRONMENT_ID string = containerAppEnvironment.id
 output AZURE_CONTAINER_APPS_ENVIRONMENT_DEFAULT_DOMAIN string = containerAppEnvironment.properties.defaultDomain
-output SERVICE_BINDING_KV265DAFE5_ENDPOINT string = kv265dafe5.properties.vaultUri
-output SERVICE_BINDING_KV265DAFE5_NAME string = kv265dafe5.name
