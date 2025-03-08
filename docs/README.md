@@ -95,16 +95,15 @@ After this command is executed, the following files are created:
 - *infra/main.bicep*: Represents the main entry point for the deployment.
 - *infra/main.parameters.json*: Used as the parameters for main Bicep (maps to environment variables defined in *.azure* folder).
 - *infra/resoures.bicep*: Defines the Azure resources required to support the .NET Aspire app model.
-- *GlobalAzure.NetAspire.Server/manifests/containerApp.tmpl.yaml*: The container app definition for `aspiredemoapp` project resource.
-- *GlobalAzure.NetAspire.Api/manifests/containerApp.tmpl.yaml*: The container app definition for `aspiredemoapi` project resource.
+- *GlobalAzure.NetAspire.AppHost/infra/aspiredemoapp.tmpl.yaml*: The container app definition for `aspiredemoapp` project resource.
+- *GlobalAzure.NetAspire.AppHost/infra/aspiredemoapi.tmpl.yaml*: The container app definition for `aspiredemoapi` project resource.
   
 The *infra\resources.bicep* file doesn't contain any definition of 
-the container apps themselves (with the exception of container apps 
-which are dependencies such as Redis and Postgres)  
+the container apps themselves.  
 
 The definition of the container apps from the .NET service
-projects is contained within the *containerApp/tmpl.yaml* files in the `manifests`
-directory in each project respectively.
+projects is contained within the *aspiredemoapp.tmpl.yaml* and *aspiredemoapi.tmpl.yaml* files in the `infra`
+directory inside `GlobalAzure.NetAspire.AppHost` project.
   
 After executing the `azd infra synth` command, when `azd provision` and `azd deploy`
 are called they use the Bicep and supporting generated files.  
