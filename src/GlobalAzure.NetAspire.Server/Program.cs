@@ -1,3 +1,4 @@
+using Azure.Identity;
 using GlobalAzure.NetAspire.Server.Data;
 using GlobalAzure.NetAspire.Server.Data.Entities;
 using GlobalAzure.NetAspire.Server.Extensions;
@@ -9,15 +10,35 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using StackExchange.Redis.Configuration;
+using StackExchange.Redis;
+using System;
 using System.Threading.Tasks;
+using System.Linq;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.AddServiceDefaults();
 
-builder.AddRedisDistributedCache("cache");
+var azureOptionsProvider = new AzureOptionsProvider();
+
+var configurationOptions = ConfigurationOptions.Parse(
+    builder.Configuration.GetConnectionString("cache") ??
+    throw new InvalidOperationException("Could not find a 'cache' connection string."));
+
+if (configurationOptions.EndPoints.Any(azureOptionsProvider.IsMatch))
+{
+    await configurationOptions.ConfigureForAzureWithTokenCredentialAsync(
+        new DefaultAzureCredential());
+}
+
+builder.AddRedisDistributedCache("cache", configureOptions: options =>
+{
+    options.Defaults = configurationOptions.Defaults;
+});
 
 builder.Services.AddAuthentication(IdentityConstants.ApplicationScheme)
     .AddIdentityCookies()

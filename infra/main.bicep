@@ -54,8 +54,9 @@ module cache 'cache/cache.module.bicep' = {
   name: 'cache'
   scope: rg
   params: {
-    keyVaultName: resources.outputs.SERVICE_BINDING_KV265DAFE5_NAME
     location: location
+    principalId: resources.outputs.MANAGED_IDENTITY_PRINCIPAL_ID
+    principalName: resources.outputs.MANAGED_IDENTITY_NAME
   }
 }
 output MANAGED_IDENTITY_CLIENT_ID string = resources.outputs.MANAGED_IDENTITY_CLIENT_ID
@@ -67,7 +68,6 @@ output AZURE_CONTAINER_REGISTRY_NAME string = resources.outputs.AZURE_CONTAINER_
 output AZURE_CONTAINER_APPS_ENVIRONMENT_NAME string = resources.outputs.AZURE_CONTAINER_APPS_ENVIRONMENT_NAME
 output AZURE_CONTAINER_APPS_ENVIRONMENT_ID string = resources.outputs.AZURE_CONTAINER_APPS_ENVIRONMENT_ID
 output AZURE_CONTAINER_APPS_ENVIRONMENT_DEFAULT_DOMAIN string = resources.outputs.AZURE_CONTAINER_APPS_ENVIRONMENT_DEFAULT_DOMAIN
-output SERVICE_BINDING_KV265DAFE5_ENDPOINT string = resources.outputs.SERVICE_BINDING_KV265DAFE5_ENDPOINT
-output SERVICE_BINDING_KV265DAFE5_NAME string = resources.outputs.SERVICE_BINDING_KV265DAFE5_NAME
 output ASPIREDEMOAPPLICATIONINSIGHTS_APPINSIGHTSCONNECTIONSTRING string = aspiredemoapplicationinsights.outputs.appInsightsConnectionString
 output ASPIREDEMOSQLSERVER_SQLSERVERFQDN string = aspiredemosqlserver.outputs.sqlServerFqdn
+output CACHE_CONNECTIONSTRING string = cache.outputs.connectionString
