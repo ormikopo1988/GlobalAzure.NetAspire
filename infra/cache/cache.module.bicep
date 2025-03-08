@@ -1,9 +1,7 @@
 @description('The location for the resource(s) to be deployed.')
 param location string = resourceGroup().location
 
-param principalId string
-
-param principalName string
+param keyVaultName string
 
 resource cache 'Microsoft.Cache/redis@2024-03-01' = {
   name: take('cache-${uniqueString(resourceGroup().id)}', 63)
@@ -15,25 +13,21 @@ resource cache 'Microsoft.Cache/redis@2024-03-01' = {
       capacity: 1
     }
     enableNonSslPort: false
-    disableAccessKeyAuthentication: true
     minimumTlsVersion: '1.2'
-    redisConfiguration: {
-      'aad-enabled': 'true'
-    }
   }
   tags: {
     'aspire-resource-name': 'cache'
   }
 }
 
-resource cache_contributor 'Microsoft.Cache/redis/accessPolicyAssignments@2024-03-01' = {
-  name: take('cachecontributor${uniqueString(resourceGroup().id)}', 24)
-  properties: {
-    accessPolicyName: 'Data Contributor'
-    objectId: principalId
-    objectIdAlias: principalName
-  }
-  parent: cache
+resource keyVault 'Microsoft.KeyVault/vaults@2023-07-01' existing = {
+  name: keyVaultName
 }
 
-output connectionString string = '${cache.properties.hostName},ssl=true'
+resource connectionString 'Microsoft.KeyVault/vaults/secrets@2023-07-01' = {
+  name: 'connectionString'
+  properties: {
+    value: '${cache.properties.hostName},ssl=true,password=${cache.listKeys().primaryKey}'
+  }
+  parent: keyVault
+}

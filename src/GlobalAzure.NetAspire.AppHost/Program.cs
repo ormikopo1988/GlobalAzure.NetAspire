@@ -16,6 +16,7 @@ var customerDb = builder
 // Provisions an Azure Redis Cache when published
 var cache = builder
     .AddAzureRedis("cache")
+    .WithAccessKeyAuthentication()
     .RunAsContainer();
 
 var aspireDemoApi = builder
