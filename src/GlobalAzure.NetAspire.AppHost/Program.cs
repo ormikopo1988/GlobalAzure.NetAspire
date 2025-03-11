@@ -42,4 +42,4 @@ if (builder.ExecutionContext.IsRunMode)
         .WithHttpEndpoint(env: "PORT");
 }
 
-builder.Build().Run();
+await builder.Build().RunAsync();
