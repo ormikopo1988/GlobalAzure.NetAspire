@@ -121,7 +121,7 @@ namespace GlobalAzure.NetAspire.Server.Services
                 Encoding.UTF8.GetBytes(JsonSerializer.Serialize(customerDto)), 
                 new()
                 {
-                    AbsoluteExpiration = DateTime.Now.AddSeconds(10)
+                    AbsoluteExpiration = DateTime.Now.AddSeconds(60)
                 }, 
                 ct);
 
