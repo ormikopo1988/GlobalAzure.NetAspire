@@ -62,8 +62,9 @@ namespace GlobalAzure.NetAspire.Server.Services
                 };
             }
 
-            var newCustomer = await _applicationDbContext.Customers.AddAsync(
-                createCustomerOptions.ToCustomer(), ct);
+            var newCustomer = _applicationDbContext
+                .Customers
+                .Add(createCustomerOptions.ToCustomer());
 
             var result = await _applicationDbContext.SaveChangesAsync(ct);
 
